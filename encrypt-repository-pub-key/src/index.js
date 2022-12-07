@@ -1,10 +1,4 @@
-/******/ /* webpack/runtime/compat */
-/******/ 
-/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
-/************************************************************************/
-var __webpack_exports__ = {};
-
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require("@actions/core");
 const axios_1 = require("axios");
@@ -35,4 +29,3 @@ axios_1.default
         core.setOutput("encrypted_value", output);
     });
 });
-
