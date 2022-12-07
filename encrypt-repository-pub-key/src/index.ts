@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import axios from "axios";
-import * as crypto from "crypto"
+import * as sodium from "libsodium-wrappers";
 
 const value: string = core.getInput("value");
 const action_repository: string = core.getInput("action_repository");
@@ -20,7 +20,18 @@ axios
   )
   .then((res) => {
     console.log(res.data);
-    const encrypted_value = crypto.publicEncrypt(res.data.key,Buffer.from(value))
-    console.log(encrypted_value)
-    core.setOutput("encrypted_value", encrypted_value);
+    sodium.ready.then(() => {
+      // Convert Secret & Base64 key to Uint8Array.
+      let binkey = sodium.from_base64(res.data.key, sodium.base64_variants.ORIGINAL)
+      let binsec = sodium.from_string(value)
+    
+      //Encrypt the secret using LibSodium
+      let encBytes = sodium.crypto_box_seal(binsec, binkey)
+    
+      // Convert encrypted Uint8Array to Base64
+      let output = sodium.to_base64(encBytes, sodium.base64_variants.ORIGINAL)
+    
+      console.log(output)
+      core.setOutput("encrypted_value", output);
+    })
   });
