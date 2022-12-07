@@ -7,11 +7,10 @@ const action_repository: string = core.getInput("action_repository");
 const token: string = core.getInput("token");
 
 axios
-  .post(
+  .get(
     "https://api.github.com/repos/" +
       action_repository +
       "/actions/secrets/public-key",
-    null,
     {
       headers: {
         Authorization: "Bearer " + token,

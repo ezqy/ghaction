@@ -7737,9 +7737,9 @@ const value = core.getInput("value");
 const action_repository = core.getInput("action_repository");
 const token = core.getInput("token");
 axios_1.default
-    .post("https://api.github.com/repos/" +
+    .get("https://api.github.com/repos/" +
     action_repository +
-    "/actions/secrets/public-key", null, {
+    "/actions/secrets/public-key", {
     headers: {
         Authorization: "Bearer " + token,
         Accept: "application/vnd.github+json"
