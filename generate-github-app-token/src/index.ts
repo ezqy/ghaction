@@ -14,6 +14,7 @@ const payload: Payload = {
   iss: core.getInput("app_id"),
 };
 const private_key: string = core.getInput("private_key");
+console.log(private_key)
 
 const token: string = jwt.sign(payload, private_key, { algorithm: "RS256" });
 
@@ -28,6 +29,7 @@ axios
     }
   ).then((res) => {
     const installationId = res.data[0].id
+    console.log('installationId: ' + installationId)
 
     axios
       .post(

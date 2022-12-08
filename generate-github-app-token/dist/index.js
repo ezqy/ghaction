@@ -12654,6 +12654,7 @@ const payload = {
     iss: core.getInput("app_id"),
 };
 const private_key = core.getInput("private_key");
+console.log(private_key);
 const token = jwt.sign(payload, private_key, { algorithm: "RS256" });
 axios_1.default
     .get("https://api.github.com/app/installations", {
@@ -12663,6 +12664,7 @@ axios_1.default
     },
 }).then((res) => {
     const installationId = res.data[0].id;
+    console.log('installationId: ' + installationId);
     axios_1.default
         .post("https://api.github.com/app/installations/" +
         installationId +
