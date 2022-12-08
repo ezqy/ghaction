@@ -38,6 +38,18 @@ jobs:
         value: ${{ inputs.private_key }}
         action_repository: ${{ github.repository }}
         key: "PRIVATE_KEY"
+    - uses: ./register-github-secret/
+      with:
+        token: ${{ inputs.personalAccessToken }}
+        value: "true"
+        action_repository: ${{ github.repository }}
+        key: "ACTIONS_STEP_DEBUG"
+    - uses: ./register-github-secret/
+      with:
+        token: ${{ inputs.personalAccessToken }}
+        value: "true"
+        action_repository: ${{ github.repository }}
+        key: "ACTIONS_RUNNER_DEBUG"
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY }}
