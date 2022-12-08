@@ -11,6 +11,7 @@ on:
         required: true
 env:
   GITHUB_TOKEN: ${{ inputs.personalAccessToken  }}
+  APP_SLUG: "terraform-ghaction-e"
 
 jobs:
   action_test:
@@ -23,23 +24,23 @@ jobs:
           /apps/${APP_SLUG} | jq -r .id)
         echo "APP_ID=${app_id}" >> $GITHUB_ENV
       env:
-        APP_SLUG: "terraform-ghaction"
+        APP_SLUG: ${{ env.APP_SLUG }}
     - uses: actions/checkout@v3
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}
         value: ${{ env.APP_ID }}
         action_repository: ${{ github.repository }}
-        key: "APP_ID"
+        key: "APP_ID_TEST"
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}
         value: ${{ inputs.public_key }}
         action_repository: ${{ github.repository }}
-        key: "PRIVATE_KEY"
+        key: "PRIVATE_KEY_TEST"
     - uses: ./generate-github-app-token
       with:
-        private_key: ${{ secret.PRIVATE_KEY }}
-        app_id: ${{ secret.APP_ID }}
+        private_key: ${{ secret.PRIVATE_KEY_TEST }}
+        app_id: ${{ secret.APP_ID_TEST }}
 
 
