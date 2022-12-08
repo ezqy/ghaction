@@ -31,7 +31,7 @@ jobs:
         token: ${{ inputs.personalAccessToken }}
         value: ${{ env.APP_ID }}
         action_repository: ${{ github.repository }}
-        key: "APP_ID_TEST"
+        key: "APP_ID"
     # - run: | 
     #     tmp=$(echo ${private_key} | sed 's/\\n/\n/g')
     #     echo 'PRIVATE_KEY=${PRIVATE_KEY}' >> $GITHUB_ENV
@@ -42,10 +42,10 @@ jobs:
         token: ${{ inputs.personalAccessToken }}
         value: ${{ inputs.private_key }}
         action_repository: ${{ github.repository }}
-        key: "PRIVATE_KEY_TEST"
+        key: "PRIVATE_KEY"
     - uses: ./generate-github-app-token
       with:
-        private_key: ${{ secrets.PRIVATE_KEY_TEST }}
-        app_id: ${{ secrets.APP_ID_TEST }}
+        private_key: ${{ secrets.PRIVATE_KEY }}
+        app_id: ${{ secrets.APP_ID }}
 
 
