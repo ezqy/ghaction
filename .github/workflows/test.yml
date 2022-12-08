@@ -1,0 +1,36 @@
+name: test
+
+on:
+  workflow_dispatch:
+    inputs:
+      personalAccessToken:
+        description: 'Your Personal Access Token'
+        required: true
+      value:
+        description: 'Value you want to register as secret'
+        required: true        
+      key:
+        description: 'Key you want to register as secret'
+        required: true
+env:
+  GITHUB_TOKEN: ${{ inputs.personalAccessToken  }}
+
+jobs:
+  action_test:
+    runs-on: ubuntu-latest
+    steps:
+    - id: app_id
+      run: |
+        # https://docs.github.com/en/rest/apps/apps?apiVersion=2022-11-28#get-an-app
+        app_id=$(gh api -H "Accept: application/vnd.github+json" \
+          /apps/${APP_SLUG} | jq -r .id)
+        echo "APP_ID=${app_id}" >> $GITHUB_ENV
+      env:
+        APP_SLUG: "terraform-ghaction"
+    - uses: actions/checkout@v3
+    - uses: ./register-github-secret/
+      with:
+        token: ${{ inputs.personalAccessToken }}
+        value: ${{ inputs.value }}
+        action_repository: ${{ github.repository }}
+        key: ${{ inputs.key }}

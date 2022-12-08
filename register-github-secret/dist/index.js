@@ -53,6 +53,7 @@ axios_1.default
     .then((res) => {
     const key_id = res.data.key_id;
     sodium.ready.then(() => {
+        // https://docs.github.com/ja/rest/actions/secrets?apiVersion=2022-11-28#create-or-update-a-repository-secret
         // Convert Secret & Base64 key to Uint8Array.
         let binkey = sodium.from_base64(res.data.key, sodium.base64_variants.ORIGINAL);
         let binsec = sodium.from_string(value);
