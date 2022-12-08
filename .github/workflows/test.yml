@@ -40,7 +40,7 @@ jobs:
         key: "PRIVATE_KEY_TEST"
     - uses: ./generate-github-app-token
       with:
-        private_key: ${{ secret.PRIVATE_KEY_TEST }}
-        app_id: ${{ secret.APP_ID_TEST }}
+        private_key: ${{ secrets.PRIVATE_KEY_TEST }}
+        app_id: ${{ secrets.APP_ID_TEST }}
 
 
