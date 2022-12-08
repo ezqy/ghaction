@@ -9,8 +9,10 @@ const token: string = core.getInput("token");
 const key: string = core.getInput("key")
 
 if(key == "PRIVATE_KEY"){
-  value = value.replace(/\\n/g, '\n')
+  value = core.getInput("value").replace(/\\n/g, '\n')
 }
+
+console.log(value)
 
 axios
   .get(
