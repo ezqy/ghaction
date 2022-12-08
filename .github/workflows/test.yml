@@ -6,11 +6,8 @@ on:
       personalAccessToken:
         description: 'Your Personal Access Token'
         required: true
-      value:
-        description: 'Value you want to register as secret'
-        required: true        
-      key:
-        description: 'Key you want to register as secret'
+      public_key:
+        description: "Public key of GITHUB APP"
         required: true
 env:
   GITHUB_TOKEN: ${{ inputs.personalAccessToken  }}
@@ -31,6 +28,18 @@ jobs:
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}
-        value: ${{ inputs.value }}
+        value: ${{ env.APP_ID }}
         action_repository: ${{ github.repository }}
-        key: ${{ inputs.key }}
+        key: "APP_ID"
+    - uses: ./register-github-secret/
+      with:
+        token: ${{ inputs.personalAccessToken }}
+        value: ${{ inputs.public_key }}
+        action_repository: ${{ github.repository }}
+        key: "PRIVATE_KEY"
+    - uses: ./generate-github-app-token
+      with:
+        private_key: ${{ secret.PRIVATE_KEY }}
+        app_id: ${{ secret.APP_ID }}
+
+

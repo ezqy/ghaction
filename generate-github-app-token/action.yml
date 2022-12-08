@@ -3,8 +3,6 @@ description: Generate github app token
 inputs:
   app_id:
     required: true
-  installation_id:
-    required: true
   private_key:
     required: true
 outputs:

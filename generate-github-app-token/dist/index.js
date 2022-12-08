@@ -12655,19 +12655,27 @@ const payload = {
 };
 const private_key = core.getInput("private_key");
 const token = jwt.sign(payload, private_key, { algorithm: "RS256" });
-const installationId = core.getInput("installation_id");
 axios_1.default
-    .post("https://api.github.com/app/installations/" +
-    installationId +
-    "/access_tokens", null, {
+    .get("https://api.github.com/app/installations", {
     headers: {
         Authorization: "Bearer " + token,
         Accept: "application/vnd.github.machine-man-preview+json",
     },
-})
-    .then((res) => {
-    console.log(res.data);
-    core.setOutput("token", res.data.token);
+}).then((res) => {
+    const installationId = res.data[0].id;
+    axios_1.default
+        .post("https://api.github.com/app/installations/" +
+        installationId +
+        "/access_tokens", null, {
+        headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/vnd.github.machine-man-preview+json",
+        },
+    })
+        .then((res) => {
+        console.log(res.data);
+        core.setOutput("token", res.data.token);
+    });
 });
 
 })();
