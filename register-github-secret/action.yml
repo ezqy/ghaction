@@ -1,0 +1,14 @@
+name: Register Github Secret
+description: Register Github Secret
+inputs:
+  value:
+    required: true
+  token:
+    required: true
+  action_repository:
+    required: true
+  key:
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

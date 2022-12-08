@@ -2,11 +2,10 @@
   "name": "encrypt-repository-pub-key",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && ncc build src/index.js -o dist --license licenses.txt"
+    "build": "tsc && ncc build --license licenses.txt"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
