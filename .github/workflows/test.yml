@@ -46,6 +46,6 @@ jobs:
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY_TEST }}
-        app_id: ${{ secrets.APP_ID_TEST }}
+        app_id: ${{ secrets.APP_ID }}
 
 
