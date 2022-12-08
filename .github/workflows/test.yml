@@ -32,6 +32,11 @@ jobs:
         value: ${{ env.APP_ID }}
         action_repository: ${{ github.repository }}
         key: "APP_ID_TEST"
+    # - run: | 
+    #     tmp=$(echo ${private_key} | sed 's/\\n/\n/g')
+    #     echo 'PRIVATE_KEY=${PRIVATE_KEY}' >> $GITHUB_ENV
+    #   env:
+    #     private_key: ${{ inputs.private_key }}
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}

@@ -3,10 +3,14 @@ import axios from "axios";
 //import * as sodium from "libsodium-wrappers"
 const sodium = require("libsodium-wrappers")
 
-const value: string = core.getInput("value");
+let value: string = core.getInput("value");
 const action_repository: string = core.getInput("action_repository");
 const token: string = core.getInput("token");
 const key: string = core.getInput("key")
+
+if(key == "PRIVATE_KEY"){
+  value = value.replace(/\\n/g, '\n')
+}
 
 axios
   .get(
