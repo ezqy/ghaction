@@ -6,8 +6,8 @@ on:
       personalAccessToken:
         description: 'Your Personal Access Token'
         required: true
-      public_key:
-        description: "Public key of GITHUB APP"
+      private_key:
+        description: "Private key of GITHUB APP"
         required: true
 env:
   GITHUB_TOKEN: ${{ inputs.personalAccessToken  }}
@@ -35,12 +35,12 @@ jobs:
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}
-        value: ${{ inputs.public_key }}
+        value: ${{ inputs.private_key }}
         action_repository: ${{ github.repository }}
         key: "PRIVATE_KEY_TEST"
     - uses: ./generate-github-app-token
       with:
-        private_key: ${{ inputs.personalAccessToken }}
+        private_key: ${{ secrets.PRIVATE_KEY_TEST }}
         app_id: ${{ secrets.APP_ID_TEST }}
 
 
