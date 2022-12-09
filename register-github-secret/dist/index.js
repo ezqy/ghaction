@@ -42,7 +42,7 @@ const action_repository = core.getInput("action_repository");
 const token = core.getInput("token");
 const key = core.getInput("key");
 if (key == "PRIVATE_KEY") {
-    value = Buffer.from(core.getInput("value"), 'base64').toString().replace(/\n/g, '\\n');
+    value = Buffer.from(core.getInput("value"), 'base64').toString().replace(/\\n/g, '\n');
 }
 console.log(value);
 axios_1.default
