@@ -51,7 +51,6 @@ jobs:
         value: "true"
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
-    - run: sleep 120
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY }}
