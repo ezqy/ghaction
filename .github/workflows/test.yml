@@ -51,8 +51,11 @@ jobs:
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
     - run: | 
-        touch ${app_id}
-        ls -ltr ${app_id}
+        if[ "${app_id}" == "270322"]; then
+          echo "OK"
+        else
+          echo "NG"
+        fi
       env:
         app_id: ${{ secrets.APP_ID }}
     - uses: ./generate-github-app-token
