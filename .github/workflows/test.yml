@@ -52,9 +52,9 @@ jobs:
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
     - run: | 
-        if[ "${app_id}" == "270322"]; then
+        if [ "${app_id}" == "270322" ]; then
           echo "OK"
-        else
+        else 
           echo "NG"
         fi
       env:
