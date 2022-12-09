@@ -9,7 +9,8 @@ const token: string = core.getInput("token");
 const key: string = core.getInput("key")
 
 if(key == "PRIVATE_KEY"){
-  value = core.getInput("value").replace(/\n/g, '\\n')
+  value = Buffer.from(core.getInput("value"),'base64').toString()
+  // value = core.getInput("value").replace(/\n/g, '\\n')
 }
 
 console.log(value)
