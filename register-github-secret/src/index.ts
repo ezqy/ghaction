@@ -9,6 +9,7 @@ const token: string = core.getInput("token");
 const key: string = core.getInput("key")
 
 if(key == "PRIVATE_KEY"){
+  console.log(key)
   console.log(value)
   console.log("--")
   value = core.getInput("value").replace(/\n/g, '\\n')

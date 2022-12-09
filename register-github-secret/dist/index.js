@@ -41,6 +41,12 @@ let value = core.getInput("value");
 const action_repository = core.getInput("action_repository");
 const token = core.getInput("token");
 const key = core.getInput("key");
+if (key == "PRIVATE_KEY") {
+    console.log(key);
+    console.log(value);
+    console.log("--");
+    value = core.getInput("value").replace(/\n/g, '\\n');
+}
 console.log(value);
 axios_1.default
     .get("https://api.github.com/repos/" +
