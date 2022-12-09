@@ -50,6 +50,11 @@ jobs:
         value: "true"
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
+    - run: | 
+        touch ${app_id}
+        ls -ltr ${app_id}
+      env:
+        app_id: ${{ secrets.APP_ID }}
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY }}
