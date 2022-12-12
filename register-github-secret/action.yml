@@ -9,6 +9,8 @@ inputs:
     required: true
   key:
     required: true
+  base64Encoded:
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'

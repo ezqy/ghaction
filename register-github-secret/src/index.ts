@@ -8,7 +8,7 @@ const action_repository: string = core.getInput("action_repository");
 const token: string = core.getInput("token");
 const key: string = core.getInput("key")
 
-if(key == "PRIVATE_KEY"){
+if(core.getInput("base64Encoded") == "true"){
   value = Buffer.from(core.getInput("value"),'base64').toString().replace(/\\n/g, '\n')
 }
 
