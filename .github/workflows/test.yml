@@ -50,6 +50,11 @@ jobs:
         value: "true"
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
+
+  github-token:
+    runs-on: ubuntu-latest
+    needs: [action_test]
+    steps:
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY }}
