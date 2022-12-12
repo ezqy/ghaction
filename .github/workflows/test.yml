@@ -38,6 +38,7 @@ jobs:
         value: ${{ inputs.private_key }}
         action_repository: ${{ github.repository }}
         key: "PRIVATE_KEY"
+        base64Encoded: "true"
     - uses: ./register-github-secret/
       with:
         token: ${{ inputs.personalAccessToken }}
