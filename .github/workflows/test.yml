@@ -55,6 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [action_test]
     steps:
+    - uses: actions/checkout@v3
     - uses: ./generate-github-app-token
       with:
         private_key: ${{ secrets.PRIVATE_KEY }}
