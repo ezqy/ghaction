@@ -1,4 +1,4 @@
-name: test
+name: create-new-branch
 
 on:
   workflow_dispatch:
