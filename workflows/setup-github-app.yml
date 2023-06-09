@@ -1,0 +1,26 @@
+name: Setup Github App
+
+on:
+  workflow_dispatch:
+    inputs:
+      personal_access_token:
+        description: 'Your Personal Access Token'
+        required: true
+        type: string
+      private_key:
+        description: "Private key of GITHUB APP"
+        required: true
+        type: string
+      app_name:
+        description: "Your Github App name"
+        required: true
+        type: string    
+
+jobs:
+  call-workflow:
+    uses: ezqy/ghaction/.github/workflows/setup-github-app.yml@main
+    secrets: inherit
+    with:
+      personal_access_token: ${{ inputs.personal_access_token }}
+      private_key: ${{ inputs.private_key }}
+      app_name: ${{ inputs.app_name }}

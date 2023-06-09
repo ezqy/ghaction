@@ -1,60 +1,81 @@
-name: test
+name: Setup Github App
 
 on:
   workflow_dispatch:
     inputs:
-      personalAccessToken:
+      personal_access_token:
         description: 'Your Personal Access Token'
         required: true
+        type: string
       private_key:
         description: "Private key of GITHUB APP"
         required: true
+        type: string
+      app_name:
+        description: "Your Github App name"
+        required: true
+        type: string        
+  workflow_call:
+    inputs:
+      personal_access_token:
+        description: 'Your Personal Access Token'
+        required: true
+        type: string
+      private_key:
+        description: "Private key of GITHUB APP"
+        required: true
+        type: string
+      app_name:
+        description: "Your Github App name"
+        required: true
+        type: string    
+  
 env:
-  GITHUB_TOKEN: ${{ inputs.personalAccessToken  }}
-  APP_SLUG: "terraform-ghaction-e"
+  GITHUB_TOKEN: ${{ inputs.personal_access_token  }}
 
 jobs:
-  action_test:
+  setup:
     runs-on: ubuntu-latest
     steps:
     - id: app_id
       run: |
+        set -x
         # https://docs.github.com/en/rest/apps/apps?apiVersion=2022-11-28#get-an-app
         app_id=$(gh api -H "Accept: application/vnd.github+json" \
-          /apps/${APP_SLUG} | jq -r .id)
-        echo "APP_ID=${app_id}" >> $GITHUB_ENV
+          /apps/${APP_NAME} | jq -r .id)
+        echo "APP_ID=${app_id}" >> $GITHUB_OUTPUT
       env:
-        APP_SLUG: ${{ env.APP_SLUG }}
+        APP_NAME: ${{ inputs.app_name }}
     - uses: actions/checkout@v3
     - uses: ./register-github-secret/
       with:
-        token: ${{ inputs.personalAccessToken }}
-        value: ${{ env.APP_ID }}
+        token: ${{ inputs.personal_access_token }}
+        value: ${{ steps.app_id.outputs.app_id }}
         action_repository: ${{ github.repository }}
         key: "APP_ID"
     - uses: ./register-github-secret/
       with:
-        token: ${{ inputs.personalAccessToken }}
+        token: ${{ inputs.personal_access_token }}
         value: ${{ inputs.private_key }}
         action_repository: ${{ github.repository }}
         key: "PRIVATE_KEY"
         base64Encoded: "true"
     - uses: ./register-github-secret/
       with:
-        token: ${{ inputs.personalAccessToken }}
+        token: ${{ inputs.personal_access_token }}
         value: "true"
         action_repository: ${{ github.repository }}
         key: "ACTIONS_STEP_DEBUG"
     - uses: ./register-github-secret/
       with:
-        token: ${{ inputs.personalAccessToken }}
+        token: ${{ inputs.personal_access_token }}
         value: "true"
         action_repository: ${{ github.repository }}
         key: "ACTIONS_RUNNER_DEBUG"
 
   github-token:
     runs-on: ubuntu-latest
-    needs: [action_test]
+    needs: [setup]
     steps:
     - uses: actions/checkout@v3
     - uses: ./generate-github-app-token
