@@ -28,6 +28,7 @@ axios
       },
     }
   ).then((res) => {
+    console.log(res.data)
     const installationId = res.data[0].id
     console.log('installationId: ' + installationId)
 

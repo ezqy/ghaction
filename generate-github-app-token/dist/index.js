@@ -12662,6 +12662,7 @@ axios_1.default
         Accept: "application/vnd.github.machine-man-preview+json",
     },
 }).then((res) => {
+    console.log(res.data);
     const installationId = res.data[0].id;
     console.log('installationId: ' + installationId);
     axios_1.default
