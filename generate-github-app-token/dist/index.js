@@ -12659,7 +12659,8 @@ axios_1.default
     .get("https://api.github.com/app/installations", {
     headers: {
         Authorization: "Bearer " + token,
-        Accept: "application/vnd.github.machine-man-preview+json",
+        Accept: "application/vnd.github+json",
+        'X-Gthub-Api-Version': "2022-11-28"
     },
 }).then((res) => {
     console.log(res.data);
@@ -12671,7 +12672,8 @@ axios_1.default
         "/access_tokens", null, {
         headers: {
             Authorization: "Bearer " + token,
-            Accept: "application/vnd.github.machine-man-preview+json",
+            Accept: "application/vnd.github+json",
+            'X-Gthub-Api-Version': "2022-11-28"
         },
     })
         .then((res) => {
