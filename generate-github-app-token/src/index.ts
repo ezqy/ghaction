@@ -24,7 +24,8 @@ axios
     {
       headers: {
         Authorization: "Bearer " + token,
-        Accept: "application/vnd.github.machine-man-preview+json",
+        Accept: "application/vnd.github+json",
+        'X-Gthub-Api-Version': "2022-11-28"
       },
     }
   ).then((res) => {
@@ -41,7 +42,8 @@ axios
         {
           headers: {
             Authorization: "Bearer " + token,
-            Accept: "application/vnd.github.machine-man-preview+json",
+            Accept: "application/vnd.github+json",
+            'X-Gthub-Api-Version': "2022-11-28"
           },
         }
       )
